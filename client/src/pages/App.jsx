@@ -1,15 +1,19 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
-
+import Navbar from '../components/Navbar'
+import Home from './Home'
+import Report from './Report'
 
 function App() {
-
-  return (
-    <div>
-      <h1>Anti-Ghost Job Detector</h1>
-      <p>In Progress</p>
-    </div>
-  )
+    return (
+        <div>
+            <Navbar />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/reports" element={<Report />} />
+            </Routes>
+        </div>
+    )
 }
 
 export default App
