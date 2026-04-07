@@ -2,8 +2,7 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import JobSearch from './pages/JobSearch'
-import Community from './pages/Community'
+import Analyze from './pages/Analyze'
 import History from './pages/History'
 
 function App() {
@@ -12,8 +11,7 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/jobsearch" element={<JobSearch />} />
-                <Route path="/community" element={<Community/>}/>
+                <Route path="/analyze" element={<Analyze />} />
                 <Route path="/history" element={<History/>}/>
             </Routes>
         </div>

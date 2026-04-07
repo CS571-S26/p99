@@ -10,10 +10,7 @@ export default function Navbar() {
                         <NavLink className="nav-link" to="/" end>Home</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/jobsearch">Job Search</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link" to="/Community">Community</NavLink>
+                        <NavLink className="nav-link" to="/analyze">Analyze</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/History">History</NavLink>
