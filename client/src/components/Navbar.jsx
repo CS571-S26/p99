@@ -15,6 +15,9 @@ export default function Navbar() {
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/Community">Community</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/History">History</NavLink>
+                    </li>
                 </ul>
             </div>
         </nav>
