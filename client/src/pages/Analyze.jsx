@@ -22,6 +22,18 @@ export default function Analyze() {
     function handleSubmit(e) {
         e.preventDefault()
         setSubmitted(true)
+        const entry = {
+            id: crypto.randomUUID(),
+            title: form.title,
+            company: form.company,
+            url: form.url,
+            score: mockScore,
+            riskLevel: risk.label,
+            analyzedAt: new Date().toISOString(),
+            feedback: null
+        }
+        const existing = JSON.parse(localStorage.getItem('p99_history') || '[]')
+        localStorage.setItem('p99_history', JSON.stringify([entry, ...existing]))
         setTimeout(() => resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
     }
 
