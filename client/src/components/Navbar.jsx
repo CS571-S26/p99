@@ -13,7 +13,10 @@ export default function Navbar() {
                         <NavLink className="nav-link" to="/analyze">Analyze</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/History">History</NavLink>
+                        <NavLink className="nav-link" to="/history">History</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/stats">Stats</NavLink>
                     </li>
                 </ul>
             </div>

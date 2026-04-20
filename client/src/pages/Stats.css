@@ -1,0 +1,230 @@
+.stats-page {
+    padding: 32px;
+    text-align: left;
+    background: aliceblue;
+    min-height: 100vh;
+
+    @media (max-width: 1024px) {
+        padding: 24px 20px;
+    }
+}
+
+.stats-empty {
+    color: var(--text);
+    font-size: 15px;
+}
+
+/* ── Stat Cards ──────────────────────────────────────── */
+
+.stat-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+
+    @media (max-width: 900px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-card-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-h);
+    font-family: var(--heading);
+    line-height: 1;
+}
+
+.stat-card-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-card-sub {
+    font-size: 12px;
+    color: var(--text);
+    margin-top: 2px;
+}
+
+/* ── Sections ────────────────────────────────────────── */
+
+.stats-section {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.stats-section h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.stats-section-hint {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 16px;
+}
+
+/* ── Risk Distribution Bars ──────────────────────────── */
+
+.risk-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.risk-bar-row {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 12px;
+}
+
+.risk-bar-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-h);
+}
+
+.risk-bar-track {
+    height: 12px;
+    background: var(--code-bg);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.risk-bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.4s ease;
+    min-width: 4px;
+}
+
+.bar-low    { background: #22c55e; }
+.bar-medium { background: #eab308; }
+.bar-high   { background: #ef4444; }
+
+.risk-bar-count {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-h);
+    white-space: nowrap;
+}
+
+.risk-bar-pct {
+    font-weight: 400;
+    color: var(--text);
+}
+
+/* ── Outcome Grid ────────────────────────────────────── */
+
+.outcome-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.outcome-item {
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.outcome-ghosted  { background: rgba(239, 68, 68, 0.08);  border: 1px solid rgba(239, 68, 68, 0.2); }
+.outcome-responded { background: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.2); }
+.outcome-pending  { background: rgba(234, 179, 8, 0.08);  border: 1px solid rgba(234, 179, 8, 0.2); }
+
+.outcome-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-h);
+    font-family: var(--heading);
+    line-height: 1;
+}
+
+.outcome-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* ── Flag Frequency ──────────────────────────────────── */
+
+.flag-freq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flag-freq-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr auto;
+    }
+}
+
+.flag-freq-label {
+    font-size: 14px;
+    color: var(--text-h);
+    min-width: 0;
+
+    @media (max-width: 700px) {
+        grid-column: 1 / -1;
+    }
+}
+
+.flag-freq-track {
+    width: 160px;
+    height: 8px;
+    background: var(--code-bg);
+    border-radius: 4px;
+    overflow: hidden;
+
+    @media (max-width: 700px) {
+        display: none;
+    }
+}
+
+.flag-freq-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+    min-width: 4px;
+}
+
+.flag-freq-pct {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+}
