@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import './Analyze.css'
+import GhostChecklist, { RED_FLAGS } from '../components/GhostChecklist'
 
 function getRiskLabel(score) {
     if (score <= 33) return { label: 'Low Risk', className: 'risk-low' }
@@ -12,8 +13,9 @@ export default function Analyze() {
     const [submitted, setSubmitted] = useState(false)
     const resultRef = useRef(null)
 
-    const mockScore = 65
-    const risk = getRiskLabel(mockScore)
+    const [checkedFlags, setCheckedFlags] = useState(new Set())
+    const score = RED_FLAGS.filter(f => checkedFlags.has(f.id)).reduce((sum, f) => sum + f.weight, 0)
+    const risk = getRiskLabel(score)
 
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -27,8 +29,9 @@ export default function Analyze() {
             title: form.title,
             company: form.company,
             url: form.url,
-            score: mockScore,
+            score: score,
             riskLevel: risk.label,
+            checkedFlags: [...checkedFlags],
             analyzedAt: new Date().toISOString(),
             feedback: null
         }
@@ -39,6 +42,7 @@ export default function Analyze() {
 
     function handleClear() {
         setForm({ title: '', company: '', description: '', url: '' })
+        setCheckedFlags(new Set())
         setSubmitted(false)
     }
 
@@ -102,6 +106,14 @@ export default function Analyze() {
                     />
                 </div>
 
+                <div className="mb-4">
+                    <GhostChecklist
+                        checked={checkedFlags}
+                        onChange={setCheckedFlags}
+                        disabled={submitted}
+                    />
+                </div>
+
                 <button type="submit" className="btn btn-dark px-4">
                     Analyze
                 </button>
@@ -110,13 +122,25 @@ export default function Analyze() {
             {submitted && (
                 <div className="result-card" ref={resultRef}>
                     <div className="score-circle">
-                        <span className="score-number">{mockScore}</span>
+                        <span className="score-number">{score}</span>
                         <span className="score-denom">/ 100</span>
                     </div>
                     <span className={`risk-badge ${risk.className}`}>{risk.label}</span>
-                    <p style={{ color: 'var(--text)', marginTop: '12px', fontSize: '14px' }}>
-                        Full analysis coming soon.
-                    </p>
+
+                    {checkedFlags.size > 0 ? (
+                        <div className="result-flags">
+                            <p className="result-flags-heading">Red flags detected:</p>
+                            <ul className="result-flags-list">
+                                {RED_FLAGS.filter(f => checkedFlags.has(f.id)).map(f => (
+                                    <li key={f.id}>{f.label}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ) : (
+                        <p style={{ color: 'var(--text)', marginTop: '12px', fontSize: '14px' }}>
+                            No red flags were selected.
+                        </p>
+                    )}
                     <button
                         type="button"
                         className="btn btn-outline-secondary btn-sm mt-3"
