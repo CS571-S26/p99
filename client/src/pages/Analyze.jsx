@@ -1,6 +1,8 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import './Analyze.css'
 import GhostChecklist, { RED_FLAGS } from '../components/GhostChecklist'
+import { detectFlags } from '../utils/analyzeDescription'
 
 function getRiskLabel(score) {
     if (score <= 33) return { label: 'Low Risk', className: 'risk-low' }
@@ -9,11 +11,26 @@ function getRiskLabel(score) {
 }
 
 export default function Analyze() {
-    const [form, setForm] = useState({ title: '', company: '', description: '', url: '' })
+    const [searchParams] = useSearchParams()
+    const [form, setForm] = useState(() => ({
+        title: searchParams.get('title') || '',
+        company: '',
+        description: '',
+        url: searchParams.get('url') || '',
+    }))
     const [submitted, setSubmitted] = useState(false)
     const resultRef = useRef(null)
 
     const [checkedFlags, setCheckedFlags] = useState(new Set())
+
+    useEffect(() => {
+        if (submitted) return
+        if (form.description.trim().length < 50) {
+            setCheckedFlags(new Set())
+            return
+        }
+        setCheckedFlags(detectFlags(form.description))
+    }, [form.description, submitted])
     const score = RED_FLAGS.filter(f => checkedFlags.has(f.id)).reduce((sum, f) => sum + f.weight, 0)
     const risk = getRiskLabel(score)
 
@@ -112,6 +129,11 @@ export default function Analyze() {
                         onChange={setCheckedFlags}
                         disabled={submitted}
                     />
+                    {!submitted && form.description.trim().length >= 50 && (
+                        <p style={{ fontSize: '12px', color: 'var(--text)', marginTop: '8px', opacity: 0.6 }}>
+                            Flags auto-detected from your description — review and adjust before submitting.
+                        </p>
+                    )}
                 </div>
 
                 <button type="submit" className="btn btn-dark px-4">
