@@ -33,6 +33,7 @@ export const RED_FLAGS = [
     id: 'reposted',
     label: 'Job appears reposted or has been listed a long time',
     description: 'A posting that keeps refreshing without being filled is a strong ghost job signal.',
+    note: 'Check manually — this cannot be detected from the description text.',
     weight: 13,
   },
   {
@@ -97,6 +98,9 @@ export default function GhostChecklist({ checked, onChange, disabled }) {
             <span className="ghost-checklist-label">{flag.label}</span>
             <span className="ghost-checklist-weight">+{flag.weight} pts</span>
             <span className="ghost-checklist-desc">{flag.description}</span>
+            {flag.note && (
+              <span className="ghost-checklist-desc" style={{ fontStyle: 'italic', opacity: 0.7 }}>{flag.note}</span>
+            )}
           </label>
         ))}
       </div>
