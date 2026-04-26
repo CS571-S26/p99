@@ -58,7 +58,7 @@ export default function Analyze() {
     }
 
     function handleClear() {
-        setForm({ title: '', company: '', description: '', url: '' })
+        setForm({ title: searchParams.get('title') || '', company: '', description: '', url: searchParams.get('url') || '' })
         setCheckedFlags(new Set())
         setSubmitted(false)
     }
