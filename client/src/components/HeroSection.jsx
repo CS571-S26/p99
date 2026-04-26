@@ -1,6 +1,28 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Container, Button, Form, InputGroup } from 'react-bootstrap'
 
 export default function HeroSection() {
+    const [input, setInput] = useState('')
+    const navigate = useNavigate()
+
+    function handleAnalyze() {
+        const trimmed = input.trim()
+        if (!trimmed) {
+            navigate('/analyze')
+            return
+        }
+        if (trimmed.startsWith('http')) {
+            navigate(`/analyze?url=${encodeURIComponent(trimmed)}`)
+        } else {
+            navigate(`/analyze?title=${encodeURIComponent(trimmed)}`)
+        }
+    }
+
+    function handleKeyDown(e) {
+        if (e.key === 'Enter') handleAnalyze()
+    }
+
     return (
          <div style={{padding: '4rem 0 3rem' }}>
             <Container className="text-center">
@@ -25,8 +47,13 @@ export default function HeroSection() {
                 </p>
 
                 <InputGroup className="mx-auto" style={{ maxWidth: '460px' }}>
-                    <Form.Control placeholder="Paste a job URL or search by title..." />
-                    <Button variant="dark">Analyze</Button>
+                    <Form.Control
+                        placeholder="Paste a job URL or search by title..."
+                        value={input}
+                        onChange={e => setInput(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <Button variant="dark" onClick={handleAnalyze}>Analyze</Button>
                 </InputGroup>
 
             </Container>
