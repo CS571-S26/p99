@@ -8,15 +8,35 @@ import HowItWorks from "../components/HowItWorks"
 export default function Home() {
     const [recentJobs, setRecentJobs] = useState([])
 
+    const [stats, setStats] = useState([
+        { number: '--', label: 'jobs analyzed' },
+        { number: '--', label: 'high-risk postings' },
+        { number: '--', label: 'ghosted after applying' },
+    ])
+
     useEffect(() => {
         const history = JSON.parse(localStorage.getItem('p99_history') || '[]')
         setRecentJobs(history.slice(0, 3))
+
+        const total = history.length
+        const highRisk = history.filter(e => e.score > 66).length
+        const withOutcome = history.filter(e => e.feedback?.status)
+        const ghosted = withOutcome.filter(e => e.feedback.status === 'ghosted').length
+        const ghostRate = withOutcome.length > 0
+            ? Math.round((ghosted / withOutcome.length) * 100) + '%'
+            : '--'
+
+        setStats([
+            { number: total || '--', label: 'jobs analyzed' },
+            { number: total ? highRisk : '--', label: 'high-risk postings' },
+            { number: ghostRate, label: 'ghosted after applying' },
+        ])
     }, [])
 
     return (
         <div style={{ background: 'aliceblue', minHeight: '100vh' }}>
             <HeroSection />
-            <StatsBar />
+            <StatsBar stats={stats} />
             <HowItWorks />
             <div style={{ maxWidth: '720px', margin: '0 auto', padding: '1.5rem' }}>
                 <h5 style={{ fontWeight: '500', marginBottom: '1rem' }}>

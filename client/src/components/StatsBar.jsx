@@ -1,12 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap'
 
-const stats = [
-  { number: '34%', label: 'of postings are ghost jobs' },
-  { number: '2.4k', label: 'community reports' },
-  { number: '89%', label: 'prediction accuracy' },
-]
-
-export default function StatsBar() {
+export default function StatsBar({ stats }) {
   return (
     <Container className="text-center py-5">
       <Row>
