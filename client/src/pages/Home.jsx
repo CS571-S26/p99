@@ -34,7 +34,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div style={{ background: 'aliceblue', minHeight: '100vh' }}>
+        <div style={{ background: 'var(--page-bg)', minHeight: '100vh' }}>
             <HeroSection />
             <StatsBar stats={stats} />
             <HowItWorks />

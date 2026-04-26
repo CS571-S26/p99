@@ -24,25 +24,45 @@ export default function HeroSection() {
     }
 
     return (
-         <div style={{padding: '4rem 0 3rem' }}>
+        <div style={{ padding: '4rem 0 3.5rem' }}>
             <Container className="text-center">
 
-                <span
-                    className="badge bg-warning text-dark mb-3"
-                    style={{fontSize: '12px', padding: '6px 14px', borderRadius: '100px'}}
-                >
+                <span style={{
+                    display: 'inline-block',
+                    fontSize: '11px',
+                    fontWeight: '600',
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                    padding: '5px 14px',
+                    borderRadius: '100px',
+                    background: 'var(--accent-bg)',
+                    color: 'var(--accent)',
+                    border: '1px solid var(--accent-border)',
+                    marginBottom: '1.25rem',
+                }}>
                     Ghost job detector
                 </span>
 
-                <h1 style={{fontSize: '2rem', fontWeight: '500', marginBottom: '1rem'}}>
-                    Stop applying to jobs that will never reply
+                <h1 style={{
+                    fontFamily: 'var(--heading)',
+                    fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                    fontWeight: '600',
+                    letterSpacing: '-0.03em',
+                    color: 'var(--text-h)',
+                    marginBottom: '1rem',
+                    lineHeight: '1.2',
+                }}>
+                    Stop applying to jobs<br />that will never reply
                 </h1>
 
-                <p
-                    className="text-muted mx-auto mb-4"
-                     style={{ maxWidth: '440px', fontSize: '14px', lineHeight: '1.6' }}
-                >
-                     We analyze job postings for patterns that predict ghosting —
+                <p style={{
+                    maxWidth: '420px',
+                    margin: '0 auto 2rem',
+                    fontSize: '15px',
+                    lineHeight: '1.65',
+                    color: 'var(--text)',
+                }}>
+                    We analyze job postings for patterns that predict ghosting —
                     before you spend hours on an application.
                 </p>
 
@@ -52,8 +72,19 @@ export default function HeroSection() {
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}
+                        style={{ borderColor: 'var(--border)', fontSize: '14px' }}
                     />
-                    <Button variant="dark" onClick={handleAnalyze}>Analyze</Button>
+                    <Button
+                        onClick={handleAnalyze}
+                        style={{
+                            background: 'var(--accent)',
+                            borderColor: 'var(--accent)',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                        }}
+                    >
+                        Analyze
+                    </Button>
                 </InputGroup>
 
             </Container>

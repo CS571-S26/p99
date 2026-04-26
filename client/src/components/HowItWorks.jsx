@@ -20,26 +20,35 @@ const steps = [
 
 export default function HowItWorks() {
     return (
-        <div style={{ padding: '3rem 0', borderTop: '1px solid #e0e0e0' }}>
+        <div style={{ padding: '3rem 0', borderTop: '1px solid var(--border)' }}>
             <Container>
-                <h5 style={{ fontWeight: '500', marginBottom: '2rem', textAlign: 'center' }}>
+                <h5 style={{ fontFamily: 'var(--heading)', fontWeight: '600', fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '2rem', textAlign: 'center' }}>
                     How it works
                 </h5>
                 <Row>
                     {steps.map((step) => (
                         <Col key={step.number} md={4} className="text-center mb-4">
                             <div style={{
-                                fontSize: '2rem',
-                                fontWeight: '500',
-                                color: '#ffc107',
-                                marginBottom: '0.5rem',
+                                width: '36px',
+                                height: '36px',
+                                borderRadius: '50%',
+                                background: 'var(--accent-bg)',
+                                border: '1px solid var(--accent-border)',
+                                color: 'var(--accent)',
+                                fontFamily: 'var(--heading)',
+                                fontSize: '14px',
+                                fontWeight: '600',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                margin: '0 auto 0.75rem',
                             }}>
                                 {step.number}
                             </div>
-                            <div style={{ fontWeight: '500', fontSize: '15px', marginBottom: '8px' }}>
+                            <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '6px', color: 'var(--text-h)' }}>
                                 {step.title}
                             </div>
-                            <div style={{ fontSize: '13px', color: '#666', lineHeight: '1.6', maxWidth: '220px', margin: '0 auto' }}>
+                            <div style={{ fontSize: '13px', color: 'var(--text)', lineHeight: '1.65', maxWidth: '220px', margin: '0 auto' }}>
                                 {step.description}
                             </div>
                         </Col>

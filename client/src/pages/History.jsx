@@ -111,7 +111,7 @@ function HistoryCard({ entry, onUpdate, onDelete }) {
     return (
         <div className="history-card">
             <div className="history-card-meta">
-                <div className="score-circle">
+                <div className={`score-circle ${risk.className}`}>
                     <span className="score-number">{entry.score}</span>
                     <span className="score-denom">/ 100</span>
                 </div>

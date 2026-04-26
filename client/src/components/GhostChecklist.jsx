@@ -97,10 +97,12 @@ export default function GhostChecklist({ checked, onChange, disabled }) {
             />
             <span className="ghost-checklist-label">{flag.label}</span>
             <span className="ghost-checklist-weight">+{flag.weight} pts</span>
-            <span className="ghost-checklist-desc">{flag.description}</span>
-            {flag.note && (
-              <span className="ghost-checklist-desc" style={{ fontStyle: 'italic', opacity: 0.7 }}>{flag.note}</span>
-            )}
+            <span className="ghost-checklist-desc">
+              {flag.description}
+              {flag.note && (
+                <><br /><span style={{ fontStyle: 'italic', opacity: 0.7 }}>{flag.note}</span></>
+              )}
+            </span>
           </label>
         ))}
       </div>

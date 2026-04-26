@@ -143,7 +143,7 @@ export default function Analyze() {
 
             {submitted && (
                 <div className="result-card" ref={resultRef}>
-                    <div className="score-circle">
+                    <div className={`score-circle ${risk.className}`}>
                         <span className="score-number">{score}</span>
                         <span className="score-denom">/ 100</span>
                     </div>
