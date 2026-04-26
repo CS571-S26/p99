@@ -10,8 +10,10 @@ export function detectFlags(description) {
   const detected = new Set()
 
   // no_salary: no salary/compensation indicators found
-  const salaryPattern = /\$[\d,]+|\bsalary\b|\bcompensation\b|\bpay range\b|\bwage\b|\bhourly\b|\b\d+k\s*[-–]\s*\d+k\b|\b\d{2,3},\d{3}\b/
-  if (!salaryPattern.test(text)) {
+  // Suppress if vague-but-intentional compensation language is present
+  const salaryPattern = /\$[\d,]+|\bpay range\b|\bwage\b|\bhourly\b|\b\d+k\s*[-–]\s*\d+k\b|\b\d{2,3},\d{3}\b/
+  const vagueCompPattern = /\bsalary\b|\bcompensation\b|\bcommensurate\b|\bcompetitive (pay|salary|compensation)\b|\bbased on experience\b|\bdoe\b/
+  if (!salaryPattern.test(text) && !vagueCompPattern.test(text)) {
     detected.add('no_salary')
   }
 
@@ -40,8 +42,27 @@ export function detectFlags(description) {
     detected.add('no_team_structure')
   }
 
-  // vague_description: description is very short
-  if (description.trim().length < 200) {
+  // vague_description: heavy use of generic filler phrases with no specifics
+  const fillerPhrases = [
+    /fast[\s-]paced environment/,
+    /self[\s-]starter/,
+    /team player/,
+    /go[\s-]getter/,
+    /results[\s-]driven/,
+    /dynamic (individual|professional|candidate)/,
+    /excellent (communication|interpersonal) skills/,
+    /strong work ethic/,
+    /detail[\s-]oriented/,
+    /passionate about (making a difference|our mission|success)/,
+    /various duties as assigned/,
+    /other duties as assigned/,
+    /wear many hats/,
+    /hit the ground running/,
+  ]
+  const fillerCount = fillerPhrases.filter(p => p.test(text)).length
+  // Flag if 3+ filler phrases and no specific tech/tool mentions (no version numbers, no named tools)
+  const hasSpecifics = /\b(react|python|sql|java|node|aws|docker|kubernetes|typescript|figma|salesforce|v\d+\.\d+|\d+\.\d+\.\d+)\b/.test(text)
+  if (fillerCount >= 3 && !hasSpecifics) {
     detected.add('vague_description')
   }
 
