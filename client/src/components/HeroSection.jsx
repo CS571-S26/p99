@@ -36,7 +36,7 @@ export default function HeroSection() {
                     padding: '5px 14px',
                     borderRadius: '100px',
                     background: 'var(--accent-bg)',
-                    color: 'var(--accent)',
+                    color: 'var(--accent-text)',
                     border: '1px solid var(--accent-border)',
                     marginBottom: '1.25rem',
                 }}>
@@ -68,6 +68,7 @@ export default function HeroSection() {
 
                 <InputGroup className="mx-auto" style={{ maxWidth: '460px' }}>
                     <Form.Control
+                        aria-label="Search by job title or paste a job URL"
                         placeholder="Paste a job URL or search by title..."
                         value={input}
                         onChange={e => setInput(e.target.value)}

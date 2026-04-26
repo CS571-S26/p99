@@ -73,8 +73,9 @@ export default function Analyze() {
             <form onSubmit={handleSubmit}>
                 <div className="row g-3 mb-3">
                     <div className="col-md-6">
-                        <label className="form-label fw-semibold">Job Title</label>
+                        <label htmlFor="job-title" className="form-label fw-semibold">Job Title</label>
                         <input
+                            id="job-title"
                             type="text"
                             className="form-control"
                             name="title"
@@ -85,8 +86,9 @@ export default function Analyze() {
                         />
                     </div>
                     <div className="col-md-6">
-                        <label className="form-label fw-semibold">Company Name</label>
+                        <label htmlFor="company-name" className="form-label fw-semibold">Company Name</label>
                         <input
+                            id="company-name"
                             type="text"
                             className="form-control"
                             name="company"
@@ -99,8 +101,9 @@ export default function Analyze() {
                 </div>
 
                 <div className="mb-3">
-                    <label className="form-label fw-semibold">Job Posting URL</label>
+                    <label htmlFor="job-url" className="form-label fw-semibold">Job Posting URL</label>
                     <input
+                        id="job-url"
                         type="url"
                         className="form-control"
                         name="url"
@@ -111,8 +114,9 @@ export default function Analyze() {
                 </div>
 
                 <div className="mb-4">
-                    <label className="form-label fw-semibold">Job Description</label>
+                    <label htmlFor="job-description" className="form-label fw-semibold">Job Description</label>
                     <textarea
+                        id="job-description"
                         className="form-control"
                         name="description"
                         rows={10}

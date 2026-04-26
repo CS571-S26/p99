@@ -39,9 +39,9 @@ export default function Home() {
             <StatsBar stats={stats} />
             <HowItWorks />
             <div style={{ maxWidth: '720px', margin: '0 auto', padding: '1.5rem' }}>
-                <h5 style={{ fontWeight: '500', marginBottom: '1rem' }}>
+                <h2 style={{ fontWeight: '500', marginBottom: '1rem', fontSize: '1rem' }}>
                     Recently analyzed jobs
-                </h5>
+                </h2>
                 {recentJobs.length > 0 ? (
                     recentJobs.map(job => (
                         <JobCard key={job.id} {...job} />

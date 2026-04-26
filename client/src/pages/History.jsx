@@ -54,8 +54,9 @@ function FeedbackForm({ initial, onSave, onCancel }) {
         <form className="feedback-form" onSubmit={handleSubmit}>
             <div className="feedback-form-row">
                 <div>
-                    <label className="form-label fw-semibold" style={{ fontSize: '13px' }}>Outcome</label>
+                    <label htmlFor="feedback-outcome" className="form-label fw-semibold" style={{ fontSize: '13px' }}>Outcome</label>
                     <select
+                        id="feedback-outcome"
                         className="form-select form-select-sm"
                         value={status}
                         onChange={e => setStatus(e.target.value)}
@@ -69,8 +70,9 @@ function FeedbackForm({ initial, onSave, onCancel }) {
                 </div>
                 {INTERVIEW_STATUSES.has(status) && (
                     <div>
-                        <label className="form-label fw-semibold" style={{ fontSize: '13px' }}># of Interviews</label>
+                        <label htmlFor="feedback-interviews" className="form-label fw-semibold" style={{ fontSize: '13px' }}># of Interviews</label>
                         <input
+                            id="feedback-interviews"
                             type="number"
                             className="form-control form-control-sm"
                             min={0}
@@ -82,8 +84,9 @@ function FeedbackForm({ initial, onSave, onCancel }) {
                 )}
             </div>
             <div>
-                <label className="form-label fw-semibold" style={{ fontSize: '13px' }}>Notes (optional)</label>
+                <label htmlFor="feedback-notes" className="form-label fw-semibold" style={{ fontSize: '13px' }}>Notes (optional)</label>
                 <textarea
+                    id="feedback-notes"
                     className="form-control form-control-sm"
                     rows={3}
                     value={notes}
@@ -228,6 +231,7 @@ export default function History() {
             {entries.length > 0 && (
                 <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
                     <select
+                        aria-label="Filter by outcome"
                         className="form-select form-select-sm"
                         style={{ width: 'auto' }}
                         value={filterStatus}
@@ -240,6 +244,7 @@ export default function History() {
                         ))}
                     </select>
                     <select
+                        aria-label="Sort order"
                         className="form-select form-select-sm"
                         style={{ width: 'auto' }}
                         value={sortBy}
