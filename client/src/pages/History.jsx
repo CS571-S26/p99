@@ -189,6 +189,8 @@ function HistoryCard({ entry, onUpdate, onDelete }) {
 
 export default function History() {
     const [entries, setEntries] = useState(loadHistory)
+    const [filterStatus, setFilterStatus] = useState('all')
+    const [sortBy, setSortBy] = useState('newest')
 
     function handleUpdate(id, feedback) {
         const updated = entries.map(e => e.id === id ? { ...e, feedback } : e)
@@ -202,6 +204,20 @@ export default function History() {
         saveHistory(updated)
     }
 
+    const visible = entries
+        .filter(e => {
+            if (filterStatus === 'all') return true
+            if (filterStatus === 'none') return !e.feedback
+            return e.feedback?.status === filterStatus
+        })
+        .sort((a, b) => {
+            if (sortBy === 'newest') return new Date(b.analyzedAt) - new Date(a.analyzedAt)
+            if (sortBy === 'oldest') return new Date(a.analyzedAt) - new Date(b.analyzedAt)
+            if (sortBy === 'score_high') return b.score - a.score
+            if (sortBy === 'score_low') return a.score - b.score
+            return 0
+        })
+
     return (
         <div className="history-page">
             <h1>Application History</h1>
@@ -209,13 +225,43 @@ export default function History() {
                 Track outcomes for jobs you've analyzed.
             </p>
 
+            {entries.length > 0 && (
+                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                    <select
+                        className="form-select form-select-sm"
+                        style={{ width: 'auto' }}
+                        value={filterStatus}
+                        onChange={e => setFilterStatus(e.target.value)}
+                    >
+                        <option value="all">All outcomes</option>
+                        <option value="none">No outcome yet</option>
+                        {STATUS_OPTIONS.map(o => (
+                            <option key={o.value} value={o.value}>{o.label}</option>
+                        ))}
+                    </select>
+                    <select
+                        className="form-select form-select-sm"
+                        style={{ width: 'auto' }}
+                        value={sortBy}
+                        onChange={e => setSortBy(e.target.value)}
+                    >
+                        <option value="newest">Newest first</option>
+                        <option value="oldest">Oldest first</option>
+                        <option value="score_high">Highest risk first</option>
+                        <option value="score_low">Lowest risk first</option>
+                    </select>
+                </div>
+            )}
+
             {entries.length === 0 ? (
                 <p className="history-empty">
                     No jobs analyzed yet.{' '}
                     <Link to="/analyze">Analyze a job posting</Link> to get started.
                 </p>
+            ) : visible.length === 0 ? (
+                <p className="history-empty">No entries match this filter.</p>
             ) : (
-                entries.map(entry => (
+                visible.map(entry => (
                     <HistoryCard
                         key={entry.id}
                         entry={entry}
