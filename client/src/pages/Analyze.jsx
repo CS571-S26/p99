@@ -65,13 +65,13 @@ export default function Analyze() {
 
     return (
         <div className="analyze-page">
-            <h1>Analyze a Job Posting</h1>
-            <p style={{ color: 'var(--text)', marginBottom: '24px' }}>
+            <h1 className="hero-animate delay-1">Analyze a Job Posting</h1>
+            <p className="hero-animate delay-2" style={{ color: 'var(--text)', marginBottom: '24px' }}>
                 Paste the job posting details below to receive a ghost job risk score.
             </p>
 
             <form onSubmit={handleSubmit}>
-                <div className="row g-3 mb-3">
+                <div className="row g-3 mb-3 hero-animate delay-3">
                     <div className="col-md-6">
                         <label htmlFor="job-title" className="form-label fw-semibold">Job Title</label>
                         <input
@@ -100,7 +100,7 @@ export default function Analyze() {
                     </div>
                 </div>
 
-                <div className="mb-3">
+                <div className="mb-3 hero-animate delay-4">
                     <label htmlFor="job-url" className="form-label fw-semibold">Job Posting URL</label>
                     <input
                         id="job-url"
@@ -113,7 +113,7 @@ export default function Analyze() {
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 hero-animate delay-5">
                     <label htmlFor="job-description" className="form-label fw-semibold">Job Description</label>
                     <textarea
                         id="job-description"
@@ -127,7 +127,7 @@ export default function Analyze() {
                     />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 hero-animate delay-6">
                     <GhostChecklist
                         checked={checkedFlags}
                         onChange={setCheckedFlags}
@@ -140,7 +140,7 @@ export default function Analyze() {
                     )}
                 </div>
 
-                <button type="submit" className="btn btn-dark px-4">
+                <button type="submit" className="btn btn-dark px-4 hero-animate delay-7">
                     Analyze
                 </button>
             </form>

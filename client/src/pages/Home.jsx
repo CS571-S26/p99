@@ -4,9 +4,11 @@ import HeroSection from "../components/HeroSection"
 import StatsBar from "../components/StatsBar"
 import JobCard from "../components/JobCard"
 import HowItWorks from "../components/HowItWorks"
+import { useInView } from '../hooks/useInView'
 
 export default function Home() {
     const [recentJobs, setRecentJobs] = useState([])
+    const [jobsRef, jobsInView] = useInView()
 
     const [stats, setStats] = useState([
         { number: '--', label: 'jobs analyzed' },
@@ -38,8 +40,8 @@ export default function Home() {
             <HeroSection />
             <StatsBar stats={stats} />
             <HowItWorks />
-            <div style={{ maxWidth: '720px', margin: '0 auto', padding: '1.5rem' }}>
-                <h2 style={{ fontWeight: '500', marginBottom: '1rem', fontSize: '1rem' }}>
+            <div ref={jobsRef} style={{ maxWidth: '720px', margin: '0 auto', padding: '1.5rem' }}>
+                <h2 className={`fade-up${jobsInView ? ' in-view' : ''}`} style={{ fontWeight: '500', marginBottom: '1rem', fontSize: '1rem' }}>
                     Recently analyzed jobs
                 </h2>
                 {recentJobs.length > 0 ? (

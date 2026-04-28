@@ -1,4 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
+import { useInView } from '../hooks/useInView'
 
 const steps = [
     {
@@ -19,37 +20,41 @@ const steps = [
 ]
 
 export default function HowItWorks() {
+    const [ref, inView] = useInView()
+
     return (
         <div style={{ padding: '3rem 0', borderTop: '1px solid var(--border)' }}>
             <Container>
-                <h5 style={{ fontFamily: 'var(--heading)', fontWeight: '600', fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '2rem', textAlign: 'center' }}>
+                <h5 className={`fade-up${inView ? ' in-view' : ''}`} style={{ fontFamily: 'var(--heading)', fontWeight: '600', fontSize: '13px', letterSpacing: '0.06em', textTransform: 'uppercase', color: 'var(--text)', marginBottom: '2rem', textAlign: 'center' }}>
                     How it works
                 </h5>
-                <Row>
-                    {steps.map((step) => (
+                <Row ref={ref}>
+                    {steps.map((step, i) => (
                         <Col key={step.number} md={4} className="text-center mb-4">
-                            <div style={{
-                                width: '36px',
-                                height: '36px',
-                                borderRadius: '50%',
-                                background: 'var(--accent-bg)',
-                                border: '1px solid var(--accent-border)',
-                                color: 'var(--accent)',
-                                fontFamily: 'var(--heading)',
-                                fontSize: '14px',
-                                fontWeight: '600',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                margin: '0 auto 0.75rem',
-                            }}>
-                                {step.number}
-                            </div>
-                            <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '6px', color: 'var(--text-h)' }}>
-                                {step.title}
-                            </div>
-                            <div style={{ fontSize: '13px', color: 'var(--text)', lineHeight: '1.65', maxWidth: '220px', margin: '0 auto' }}>
-                                {step.description}
+                            <div className={`fade-up delay-${i + 2}${inView ? ' in-view' : ''}`}>
+                                <div style={{
+                                    width: '36px',
+                                    height: '36px',
+                                    borderRadius: '50%',
+                                    background: 'var(--accent-bg)',
+                                    border: '1px solid var(--accent-border)',
+                                    color: 'var(--accent)',
+                                    fontFamily: 'var(--heading)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    margin: '0 auto 0.75rem',
+                                }}>
+                                    {step.number}
+                                </div>
+                                <div style={{ fontWeight: '600', fontSize: '14px', marginBottom: '6px', color: 'var(--text-h)' }}>
+                                    {step.title}
+                                </div>
+                                <div style={{ fontSize: '13px', color: 'var(--text)', lineHeight: '1.65', maxWidth: '220px', margin: '0 auto' }}>
+                                    {step.description}
+                                </div>
                             </div>
                         </Col>
                     ))}

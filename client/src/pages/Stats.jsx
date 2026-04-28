@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { RED_FLAGS } from '../components/GhostChecklist'
 import StatCard from '../components/StatCard'
+import { useInView } from '../hooks/useInView'
 import './Stats.css'
 
 function loadHistory() {
@@ -46,6 +47,10 @@ function FlagFrequencyRow({ flag, count, total }) {
 
 export default function Stats() {
     const [entries] = useState(loadHistory)
+    const [cardsRef, cardsInView] = useInView()
+    const [riskRef, riskInView] = useInView()
+    const [outcomeRef, outcomeInView] = useInView()
+    const [flagsRef, flagsInView] = useInView()
 
     const total = entries.length
     const avgScore = total > 0
@@ -82,8 +87,8 @@ export default function Stats() {
 
     return (
         <div className="stats-page">
-            <h1>Insights</h1>
-            <p style={{ color: 'var(--text)', marginBottom: '32px' }}>
+            <h1 className="hero-animate delay-1">Insights</h1>
+            <p className="hero-animate delay-2" style={{ color: 'var(--text)', marginBottom: '32px' }}>
                 Aggregated stats from all your analyzed job postings.
             </p>
 
@@ -94,14 +99,14 @@ export default function Stats() {
                 </p>
             ) : (
                 <>
-                    <div className="stat-cards">
+                    <div ref={cardsRef} className={`stat-cards fade-up${cardsInView ? ' in-view' : ''}`}>
                         <StatCard label="Total Analyzed" value={total} />
                         <StatCard label="Avg Risk Score" value={avgScore} sub="out of 100" />
                         <StatCard label="High Risk" value={riskCounts.high} sub={`${Math.round((riskCounts.high / total) * 100)}% of total`} />
                         <StatCard label="Outcomes Logged" value={withFeedback.length} />
                     </div>
 
-                    <section className="stats-section">
+                    <section ref={riskRef} className={`stats-section fade-up${riskInView ? ' in-view' : ''}`}>
                         <h2>Risk Distribution</h2>
                         <div className="risk-bars">
                             <RiskBar label="Low" count={riskCounts.low} total={total} colorClass="bar-low" />
@@ -111,7 +116,7 @@ export default function Stats() {
                     </section>
 
                     {withFeedback.length > 0 && (
-                        <section className="stats-section">
+                        <section ref={outcomeRef} className={`stats-section fade-up${outcomeInView ? ' in-view' : ''}`}>
                             <h2>Outcome Summary</h2>
                             <div className="outcome-grid">
                                 <div className="outcome-item outcome-ghosted">
@@ -130,7 +135,7 @@ export default function Stats() {
                         </section>
                     )}
 
-                    <section className="stats-section">
+                    <section ref={flagsRef} className={`stats-section fade-up${flagsInView ? ' in-view' : ''}`}>
                         <h2>Red Flag Frequency</h2>
                         <p className="stats-section-hint">
                             How often each red flag was detected across all {total} analyzed posting{total !== 1 ? 's' : ''}.

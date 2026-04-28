@@ -223,13 +223,13 @@ export default function History() {
 
     return (
         <div className="history-page">
-            <h1>Application History</h1>
-            <p style={{ color: 'var(--text)', marginBottom: '24px' }}>
+            <h1 className="hero-animate delay-1">Application History</h1>
+            <p className="hero-animate delay-2" style={{ color: 'var(--text)', marginBottom: '24px' }}>
                 Track outcomes for jobs you've analyzed.
             </p>
 
             {entries.length > 0 && (
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+                <div className="hero-animate delay-3" style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
                     <select
                         aria-label="Filter by outcome"
                         className="form-select form-select-sm"
@@ -266,13 +266,18 @@ export default function History() {
             ) : visible.length === 0 ? (
                 <p className="history-empty">No entries match this filter.</p>
             ) : (
-                visible.map(entry => (
-                    <HistoryCard
+                visible.map((entry, i) => (
+                    <div
                         key={entry.id}
-                        entry={entry}
-                        onUpdate={handleUpdate}
-                        onDelete={handleDelete}
-                    />
+                        className="hero-animate"
+                        style={{ animationDelay: `${0.1 + Math.min(i, 6) * 0.07}s` }}
+                    >
+                        <HistoryCard
+                            entry={entry}
+                            onUpdate={handleUpdate}
+                            onDelete={handleDelete}
+                        />
+                    </div>
                 ))
             )}
         </div>
