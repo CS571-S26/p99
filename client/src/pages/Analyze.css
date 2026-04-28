@@ -9,6 +9,47 @@
   }
 }
 
+/* ── Form inputs ─────────────────────────────────────── */
+
+.analyze-page .form-label {
+  font-size: 14px;
+  color: var(--text-h);
+  margin-bottom: 6px;
+}
+
+.analyze-page .form-control {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 10px 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: none;
+}
+
+.analyze-page .form-control::placeholder {
+  color: var(--text);
+  opacity: 0.55;
+}
+
+.analyze-page .form-control:hover {
+  border-color: #cac8cd;
+}
+
+.analyze-page .form-control:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+  outline: none;
+}
+
+.analyze-page textarea.form-control {
+  resize: vertical;
+  min-height: 180px;
+  line-height: 1.6;
+}
+
 .analyze-page > * {
   max-width: 820px;
   margin-left: auto;
