@@ -200,11 +200,56 @@
 .feedback-form {
   margin-top: 12px;
   padding: 16px;
-  background: var(--code-bg);
-  border-radius: 6px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
+}
+
+.feedback-form .form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 5px;
+}
+
+.feedback-form .form-control,
+.feedback-form .form-select {
+  background: var(--page-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font-family: var(--sans);
+  font-size: 14px;
+  padding: 8px 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-shadow: none;
+  height: auto;
+}
+
+.feedback-form .form-control::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+
+.feedback-form .form-control:hover,
+.feedback-form .form-select:hover {
+  border-color: #cac8cd;
+}
+
+.feedback-form .form-control:focus,
+.feedback-form .form-select:focus {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+  outline: none;
+  background: var(--page-bg);
+}
+
+.feedback-form textarea.form-control {
+  resize: vertical;
+  line-height: 1.55;
 }
 
 .feedback-form-row {
@@ -221,4 +266,39 @@
 .feedback-form-actions {
   display: flex;
   gap: 8px;
+}
+
+.feedback-form-actions .btn-save {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  font-family: var(--sans);
+}
+
+.feedback-form-actions .btn-save:hover {
+  opacity: 0.85;
+}
+
+.feedback-form-actions .btn-cancel {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: var(--sans);
+}
+
+.feedback-form-actions .btn-cancel:hover {
+  border-color: #cac8cd;
+  color: var(--text-h);
 }

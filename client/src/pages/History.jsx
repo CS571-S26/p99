@@ -54,7 +54,7 @@ function FeedbackForm({ initial, onSave, onCancel }) {
         <form className="feedback-form" onSubmit={handleSubmit}>
             <div className="feedback-form-row">
                 <div>
-                    <label htmlFor="feedback-outcome" className="form-label fw-semibold" style={{ fontSize: '13px' }}>Outcome</label>
+                    <label htmlFor="feedback-outcome" className="form-label">Outcome</label>
                     <select
                         id="feedback-outcome"
                         className="form-select form-select-sm"
@@ -70,7 +70,7 @@ function FeedbackForm({ initial, onSave, onCancel }) {
                 </div>
                 {INTERVIEW_STATUSES.has(status) && (
                     <div>
-                        <label htmlFor="feedback-interviews" className="form-label fw-semibold" style={{ fontSize: '13px' }}># of Interviews</label>
+                        <label htmlFor="feedback-interviews" className="form-label"># of Interviews</label>
                         <input
                             id="feedback-interviews"
                             type="number"
@@ -84,7 +84,7 @@ function FeedbackForm({ initial, onSave, onCancel }) {
                 )}
             </div>
             <div>
-                <label htmlFor="feedback-notes" className="form-label fw-semibold" style={{ fontSize: '13px' }}>Notes (optional)</label>
+                <label htmlFor="feedback-notes" className="form-label">Notes (optional)</label>
                 <textarea
                     id="feedback-notes"
                     className="form-control form-control-sm"
@@ -95,8 +95,8 @@ function FeedbackForm({ initial, onSave, onCancel }) {
                 />
             </div>
             <div className="feedback-form-actions">
-                <button type="submit" className="btn btn-dark btn-sm">Save</button>
-                <button type="button" className="btn btn-outline-secondary btn-sm" onClick={onCancel}>Cancel</button>
+                <button type="submit" className="btn-save">Save</button>
+                <button type="button" className="btn-cancel" onClick={onCancel}>Cancel</button>
             </div>
         </form>
     )
