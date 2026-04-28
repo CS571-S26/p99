@@ -4,13 +4,13 @@ import { useInView } from '../hooks/useInView'
 const steps = [
     {
         number: '1',
-        title: 'Browse already analyzed jobs',
-        description: 'The home page shows jobs that have already been analyzed. Search by title to quickly check if a job you found has been scored before.',
+        title: 'Find a job posting',
+        description: 'Find a job you\'re interested in on any job board like LinkedIn or Indeed. Copy the URL or the full job description.',
     },
     {
         number: '2',
-        title: 'Found something new? Analyze it',
-        description: 'If the job hasn\'t been analyzed yet, head to the Analyze page. Paste the URL or full job description and we\'ll run it through our ghost detection system.',
+        title: 'Get your ghost score',
+        description: 'Head to the Analyze page and paste the job details. Check off any red flags you notice and we\'ll calculate an instant ghost risk score.',
     },
     {
         number: '3',
